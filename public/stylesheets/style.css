@@ -1,8 +1,37 @@
+html {
+  height: 100%;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #edeff0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a {
   color: #00B7FF;
+}
+
+.app {
+    background-color: white;
+    border-radius: 10px;
+    width: 80%;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+
+.btn {
+  border-radius: 5px;
+  background-color: lightblue;
+  color: black;
+  text-decoration: none;
+  padding: 5px 10px 5px 10px;
+}
+
+.btn:hover {
+  background-color: blue;
 }

@@ -8,10 +8,8 @@ const dbUrl = 'localhost:27017/urlshortener';
 const db = monk(dbUrl);
 
 db.then(() => {
-  console.log('Connected to Database');
+  //console.log('Connected to Database');
 });
-
-
 
 router.post('/addurl', function(req,res,next){
   const countCollection = db.get('count');
@@ -39,7 +37,6 @@ router.get('/newurl', function(req, res, next) {
 router.get('/:encoded_id', function(req, res, next) {
   urlsCollection = db.get('urls');
   var decoded_id = base58.decode(req.param('encoded_id'));
-  console.log(decoded_id);
 
   urlsCollection.findOne({"_id":decoded_id}).then((doc) => {
     if(doc){

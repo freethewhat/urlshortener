@@ -17,7 +17,7 @@ router.post('/addurl', function(req,res,next){
 
   let id = '';
   let encryptedId = '';
-  let hostname = "http://localhost:3000/"
+  let hostname = "https://thawing-bastion-70505.herokuapp.com/"
 
   countCollection.findOne({}).then((doc) => {
     id = doc.count + 1;

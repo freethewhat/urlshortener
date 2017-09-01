@@ -4,7 +4,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var base58 = require('base58');
 
-const dbUrl = 'localhost:27017/urlshortener';
+const dbUrl = 'mongodb://webuser_app:sy4T8LXgUWHfer9d@ds119014.mlab.com:19014/urlshortener';
 const db = monk(dbUrl);
 
 db.then(() => {

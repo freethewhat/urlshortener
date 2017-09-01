@@ -3,4 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(method="POST" action="/addurl")
+    input(type="text" placeholder="URL to Shorten")
+    button(type="submit") Submit
   p testing nodemon

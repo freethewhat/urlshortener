@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Magical URL Shortener
-  form(name="addurl" method="POST" action="/addurl")
-    input(type="text" placeholder="URL to Shorten" name="long_url")
-    button(type="submit") Submit
+  form(name="addurl" method="POST" action="/addurl" onsubmit="validateForm(long_url)")
+    input#userUrl(type="text" placeholder="URL to Shorten" name="long_url")
+    button#btnSubmit(type="submit" disabled) Submit
   p testing nodemon

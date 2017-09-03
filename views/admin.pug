@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  table
+    thead
+      th ID
+      th Websites
+      th Date Created
+    tbody
+      each val in websites
+          tr
+            td= val._id
+            td 
+              a(href=val.long_url target="_blank")= val.long_url
+            td= val.date_creation

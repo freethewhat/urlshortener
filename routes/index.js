@@ -29,6 +29,17 @@ router.post('/addurl', function(req,res,next){
   });
 });
 
+router.get('/admin', function(req, res) {
+  const urlsCollection = db.get('urls');
+
+  urlsCollection.find({},{}).then((docs) => {
+    // for(let i in docs) {
+    //   console.log(docs[i]);
+    // }
+    res.render('admin', {title: "Admin Page", websites: docs});
+  });
+});
+
 router.get('/newurl', function(req, res, next) {
   res.render('newurl', {title: 'Your URL', 'short_url':req.param('short_url')});
 });

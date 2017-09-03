@@ -11,22 +11,51 @@ db.then(() => {
 });
 
 router.post('/addurl', function(req,res,next){
+  // connects to database collections
   const countCollection = db.get('count');
   const urlsCollection = db.get('urls');
 
+  // initial setup variables for ID selection and encoding
   let id = '';
   let encryptedId = '';
+
+  // hostname used in the url parameter in redirect
+  // seems like there may be better way to do this
   let hostname = "https://thawing-bastion-70505.herokuapp.com/"
 
-  countCollection.findOne({}).then((doc) => {
-    id = doc.count + 1;
-    encryptedId = base58.encode(id);
+  // looks the current count in count collection
+  // need to determine a way to see if the URL is already in the database
+  urlsCollection.findOne({"long_url":req.body.long_url}).then((doc) => {
+    if(doc === null) {
+      countCollection.findOne({}).then((doc) => {
+        id = doc.count + 1;
+        encryptedId = base58.encode(id);
 
-    urlsCollection.insert({'_id':id,'long_url':req.body.long_url,'date_creation':Date()});
-    countCollection.update({'count':id -1},{'count': id});
-  }).then(() =>{
-    res.redirect('/newurl?short_url=' + hostname + encryptedId);
+        //add the new url to the URL collection and add the new count into count collection
+        urlsCollection.insert({'_id':id,'long_url':req.body.long_url,'date_creation':Date()});
+        countCollection.update({'count':id -1},{'count': id});
+      }).then(() =>{
+        //once complete redirect to the
+        res.redirect('/newurl?short_url=' + hostname + encryptedId);
+      });
+    } else {
+      console.log("already in DB: " + doc._id);
+      encryptedId = base58.encode(doc._id);
+
+      res.redirect('/newurl?short_url=' + hostname + encryptedId);
+    }
   });
+  // countCollection.findOne({}).then((doc) => {
+  //   id = doc.count + 1;
+  //   encryptedId = base58.encode(id);
+  //
+  //   //add the new url to the URL collection and add the new count into count collection
+  //   urlsCollection.insert({'_id':id,'long_url':req.body.long_url,'date_creation':Date()});
+  //   countCollection.update({'count':id -1},{'count': id});
+  // }).then(() =>{
+  //   //once complete redirect to the
+  //   res.redirect('/newurl?short_url=' + hostname + encryptedId);
+  // });
 });
 
 router.get('/admin', function(req, res) {

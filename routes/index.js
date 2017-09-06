@@ -45,26 +45,12 @@ router.post('/addurl', function(req,res,next){
       res.redirect('/newurl?short_url=' + hostname + encryptedId);
     }
   });
-  // countCollection.findOne({}).then((doc) => {
-  //   id = doc.count + 1;
-  //   encryptedId = base58.encode(id);
-  //
-  //   //add the new url to the URL collection and add the new count into count collection
-  //   urlsCollection.insert({'_id':id,'long_url':req.body.long_url,'date_creation':Date()});
-  //   countCollection.update({'count':id -1},{'count': id});
-  // }).then(() =>{
-  //   //once complete redirect to the
-  //   res.redirect('/newurl?short_url=' + hostname + encryptedId);
-  // });
 });
 
 router.get('/admin', function(req, res) {
   const urlsCollection = db.get('urls');
 
   urlsCollection.find({},{}).then((docs) => {
-    // for(let i in docs) {
-    //   console.log(docs[i]);
-    // }
     res.render('admin', {title: "Admin Page", websites: docs});
   });
 });

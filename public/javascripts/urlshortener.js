@@ -5,19 +5,9 @@ function validateForm(url){
   return res;
 }
 
-if(document.getElementById('userUrl')){
-  document.getElementById('userUrl').addEventListener('keyup',(element) => {
-    if(validateForm(element.target.value)){
-      document.getElementById('btnSubmit').disabled = false;
-    }
-  })
-
-}
-
-// var tableRows = document.getElementsByTagName('tr');
-// for(let i in tableRows) {
-//   console.log(tableRows[i])
-//   tableRows.addEventListener('click',() => {
-//     console.log('clicked')
-//   });
-// }
+console.log("loaded")
+document.getElementById('userUrl').addEventListener('keyup',(element) => {
+  if(validateForm(element.target.value)){
+    document.getElementById('btnSubmit').disabled = false;
+  }
+});
